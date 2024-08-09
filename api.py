@@ -1,8 +1,4 @@
-from flask import Flask, request, jsonify, send_file
-from PIL import Image
-import requests
-import urllib.request
-from io import BytesIO
+from flask import Flask, request, send_file
 
 app = Flask(__name__)
 no_base_image = "app.Flask." + __name__ + ".no_base_image"
@@ -13,12 +9,19 @@ def home():
 
 @app.route('/edit_image')
 def get_image():
-    base_image = request.args.get("base_image", default=no_base_image)
-    print(base_image)
+    base_image_url = request.args.get("base_image", default=no_base_image)
+    if(base_image_url == no_base_image):
+        return "You did not provide a URL"
+
     try:
-        r = requests.get(base_image, stream=True)
-        aux_im = Image.open(BytesIO(r.content))
-        aux_im.show()
+        base_image = get_image(base_image_url)
+
+
+
+        return send_file(base_image)
+
+
+        
     except Exception as e:
         print(e)
         return "You provided a bad URL or did not provide one for base_image, try uploading the base image on imgur"
