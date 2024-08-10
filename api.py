@@ -1,6 +1,5 @@
 from flask import Flask, request, send_file
 from resolve_image import resolve_image
-import Base_Image_Editing as BIE
 from io import BytesIO
 from resolve_functions import resolve_functions
 from PIL import ImageFile
@@ -44,7 +43,7 @@ def get_image():
         print(e)
         return "You provided an invalid parameter or there was an Internal Error"
     
-    
+
     try:
         img_byte_arr = BytesIO()
         edited_image.save(img_byte_arr, format='JPEG')
