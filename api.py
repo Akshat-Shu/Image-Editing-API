@@ -24,7 +24,6 @@ def get_image():
         base_image = resolve_image(base_image_url)
         edited_image = base_image
 
-        #TODO: do whatever edits required
     except Exception as e:
         print(e)
         return "You provided a bad URL for base_image. It could be that your Image Hosting Provider does not allow requests."
@@ -34,6 +33,9 @@ def get_image():
         all_base_functions = resolve_functions('Base_Image_Editing')
         base_function_names = all_base_functions.keys()
 
+
+        #TODO: Rather than looping all functions, use the keys for parameters
+        # it would be quicker and would provide more functionality
         for name in base_function_names:
             parameter_value = request.args.get(name, default=None)
             if parameter_value:
