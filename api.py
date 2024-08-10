@@ -38,8 +38,12 @@ def get_image():
             parameter_value = request.args.get(name, default=None)
             if parameter_value:
                 edited_image = all_base_functions[name](edited_image, parameter_value, request.args)
-                if not isinstance(edited_image, Image):
-                    return edited_image if isinstance(edited_image, str) else f"new type: {type(edited_image)}"
+                if not isinstance(edited_image, Image.Image):
+                    if isinstance(edited_image, str):
+                        return edited_image 
+                    else:
+                        print(f"new type: {type(edited_image)}")
+                        return "Please contact the developer regarding this issue"
                 
 
     except Exception as e:
