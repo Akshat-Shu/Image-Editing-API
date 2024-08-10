@@ -2,13 +2,14 @@ from flask import Flask, request, send_file
 from resolve_image import resolve_image
 import Base_Image_Editing as BIE
 from io import BytesIO
+from resolve_functions import resolve_functions
 
 app = Flask(__name__)
 no_base_image = "app.Flask." + __name__ + ".no_base_image"
 
 @app.route("/")
 def home():
-    return "Home"
+    return "use the path /edit_image to start editing your images!"
 
 @app.route('/edit_image')
 def get_image():
@@ -19,6 +20,15 @@ def get_image():
     try:
         base_image = resolve_image(base_image_url)
         #TODO: do whatever edits required
+
+        all_base_functions = resolve_functions('./Base_Image_editing')
+        base_function_names = all_base_functions.keys()
+
+        for name in base_function_names:
+            parameter_value = request.args.get(name, default=None)
+            if parameter_value:
+                all_base_functions[name](base_image, parameter_value, request.args)
+
 
         img_byte_arr = BytesIO()
         base_image.save(img_byte_arr, format='JPEG')
