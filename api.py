@@ -30,7 +30,7 @@ def get_image():
 
     # resolve image with all base image functions
     try:
-        all_base_functions = resolve_functions('./base_image_editing')
+        all_base_functions = resolve_functions('Base_Image_Editing')
         base_function_names = all_base_functions.keys()
 
         for name in base_function_names:
