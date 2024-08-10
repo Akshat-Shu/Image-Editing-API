@@ -22,7 +22,7 @@ def get_image():
     #image resolution
     try:
         base_image = resolve_image(base_image_url)
-        edited_image = base_image
+        edited_image = base_image.copy()
 
     except Exception as e:
         print(e)
@@ -58,6 +58,7 @@ def get_image():
         edited_image.save(img_byte_arr, format='JPEG')
         img_byte_arr.seek(0)  # Move cursor back to the start of the buffer
         
+        edited_image.close()
         return send_file(img_byte_arr, mimetype='image/jpeg', as_attachment=False)
     except Exception as e:
         print(e)
