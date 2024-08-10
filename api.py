@@ -1,6 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, send_file
 from resolve_image import resolve_image
 import Base_Image_Editing as BIE
+from io import BytesIO
 
 app = Flask(__name__)
 no_base_image = "app.Flask." + __name__ + ".no_base_image"
@@ -17,8 +18,14 @@ def get_image():
 
     try:
         base_image = resolve_image(base_image_url)
+        #TODO: do whatever edits required
 
-        # return send_file(base_image)
+        img_byte_arr = BytesIO()
+        base_image.save(img_byte_arr, format='JPEG')
+        img_byte_arr.seek(0)  # Move cursor back to the start of the buffer
+        
+        return send_file(img_byte_arr, mimetype='image/jpeg', as_attachment=False)
+
 
 
         
