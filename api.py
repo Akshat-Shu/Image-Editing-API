@@ -2,7 +2,7 @@ from flask import Flask, request, send_file
 from resolve_image import resolve_image
 from io import BytesIO
 from resolve_functions import resolve_functions
-from PIL import ImageFile
+from PIL import ImageFile, Image
 
 app = Flask(__name__)
 no_base_image = "app.Flask." + __name__ + ".no_base_image"
@@ -23,6 +23,7 @@ def get_image():
     try:
         base_image = resolve_image(base_image_url)
         edited_image = base_image
+
         #TODO: do whatever edits required
     except Exception as e:
         print(e)
@@ -36,8 +37,10 @@ def get_image():
         for name in base_function_names:
             parameter_value = request.args.get(name, default=None)
             if parameter_value:
-                print(f'{name} {parameter_value}')
                 edited_image = all_base_functions[name](edited_image, parameter_value, request.args)
+                if not isinstance(edited_image, Image):
+                    return edited_image if isinstance(edited_image, str) else f"new type: {type(edited_image)}"
+                
 
     except Exception as e:
         print(e)
