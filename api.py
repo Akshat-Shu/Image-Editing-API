@@ -28,7 +28,7 @@ def get_image():
         print(e)
         return "You provided a bad URL for base_image. It could be that your Image Hosting Provider does not allow requests."
 
-    # resolve all base image functions
+    # resolve image with all base image functions
     try:
         all_base_functions = resolve_functions('./base_image_editing')
         base_function_names = all_base_functions.keys()
@@ -43,7 +43,7 @@ def get_image():
         print(e)
         return "You provided an invalid parameter or there was an Internal Error"
     
-
+    # return resolved image
     try:
         img_byte_arr = BytesIO()
         edited_image.save(img_byte_arr, format='JPEG')
