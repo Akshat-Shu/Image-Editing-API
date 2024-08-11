@@ -27,3 +27,5 @@ TODO: specify rotate_background_color in hex
 
 
 Images are not stored as files or temp files on the Hard Disk of any system. They are only stored as variables on the RAM. Using the Pillow library secures against decompression bombs
+
+Deployed on Google Project IDX
