@@ -9,3 +9,6 @@ def width(image: ImageFile, parameter_value: str, request_args: dict[str, str]):
 def height(image: ImageFile, parameter_value: str, request_args: dict[str, str]):
     image = image.resize((image.width, int(parameter_value)))
     return image
+
+def scale(image: ImageFile, parameter_value: str, request_args: dict[str, str]):
+    image = image.sca

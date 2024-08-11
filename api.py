@@ -1,8 +1,9 @@
 from flask import Flask, request, send_file
-from resolve_image import resolve_image
+from Functions.resolve_image import resolve_image
 from io import BytesIO
-from resolve_functions import resolve_functions
+from Functions.resolve_functions import resolve_functions
 from PIL import ImageFile, Image
+import os
 
 app = Flask(__name__)
 no_base_image = "app.Flask." + __name__ + ".no_base_image"
@@ -23,6 +24,7 @@ def get_image():
     try:
         base_image = resolve_image(base_image_url)
         edited_image = base_image.copy()
+        
 
     except Exception as e:
         print(e)
@@ -30,10 +32,12 @@ def get_image():
 
     # resolve image with all base image functions
     try:
-        all_base_functions = resolve_functions('Base_Image_Editing')
+        all_base_functions = resolve_functions(os.path.join(
+            os.path.dirname(__file__), 'Base_Image_Editing'
+        ))
         base_function_names = all_base_functions.keys()
 
-
+        
         #TODO: Rather than looping all functions, use the keys for parameters
         # it would be quicker and would provide more functionality
         for name in base_function_names:
@@ -50,16 +54,17 @@ def get_image():
 
     except Exception as e:
         print(e)
-        return "You provided an invalid parameter or there was an Internal Error"
+        return "You provided an invalid parameter or there was an Internal Error while editing your image"
     
     # return resolved image
     try:
         img_byte_arr = BytesIO()
-        edited_image.save(img_byte_arr, format='JPEG')
+        edited_image.save(img_byte_arr, format=base_image.format)
         img_byte_arr.seek(0)  # Move cursor back to the start of the buffer
         
         edited_image.close()
-        return send_file(img_byte_arr, mimetype='image/jpeg', as_attachment=False)
+        print(base_image.filename)
+        return send_file(img_byte_arr, as_attachment=False)
     except Exception as e:
         print(e)
         return "There was an error in presenting the image"

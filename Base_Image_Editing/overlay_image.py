@@ -1,5 +1,5 @@
 from PIL import ImageFile
-from resolve_image import resolve_image
+from Functions.resolve_image import resolve_image
 
 def overlay_image_url(image: ImageFile, parameter_value: str, request_args: dict[str, str]):
     overlay_image = None
@@ -9,6 +9,7 @@ def overlay_image_url(image: ImageFile, parameter_value: str, request_args: dict
     # resolve overlay image
     try:
         overlay_image = resolve_image(parameter_value)
+
     except Exception as e:
         print(e)
         return "Unable to resolve your overlay image, you provided a bad URL"
