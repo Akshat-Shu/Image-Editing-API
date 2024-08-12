@@ -32,7 +32,7 @@ Currently, this project only serves PNG Images But it may serve JPEG images too 
 
 Developed for Google Project IDX Hackathon
 
-NOTE: /edit_image?base_image=base.jpg&overlay_image_url=overlay.png&overlay_image_x=55&overlay_image_y=55&rotate=45&rotate_expand=y
+**NOTE:** /edit_image?base_image=base.jpg&overlay_image_url=overlay.png&rotate=45
 and 
-/edit_image?base_image=base.jpg&rotate=45&rotate_expand=y&overlay_image_url=overlay.png&overlay_image_x=55&overlay_image_y=55
+/edit_image?base_image=base.jpg&rotate=45&overlay_image_url=overlay.png
 return different images. This is done to enable more functionality
