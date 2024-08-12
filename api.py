@@ -40,7 +40,7 @@ def get_image():
         
         #TODO: Rather than looping all functions, use the keys for parameters
         # it would be quicker and would provide more functionality
-        for name in base_function_names:
+        """for name in base_function_names:
             parameter_value = request.args.get(name, default=None)
             if parameter_value:
                 edited_image = all_base_functions[name](edited_image, parameter_value, request.args)
@@ -50,6 +50,18 @@ def get_image():
                     else:
                         print(f"new type: {type(edited_image)}")
                         return "Please contact the developer regarding this issue"
+                        """
+
+        for parameter_key, parameter_value in request.args.items():
+            if (parameter_key in base_function_names) and parameter_value:
+                edited_image = all_base_functions[parameter_key](edited_image, parameter_value, request.args)
+                if not isinstance(edited_image, Image.Image):
+                    if isinstance(edited_image, str):
+                        return edited_image 
+                    else:
+                        print(f"new type: {type(edited_image)}")
+                        return "Please contact the developer regarding this issue"
+                
                 
 
     except Exception as e:
@@ -59,12 +71,11 @@ def get_image():
     # return resolved image
     try:
         img_byte_arr = BytesIO()
-        edited_image.save(img_byte_arr, format=base_image.format)
+        edited_image.save(img_byte_arr, format='png')
         img_byte_arr.seek(0)  # Move cursor back to the start of the buffer
         
         edited_image.close()
-        print(base_image.filename)
-        return send_file(img_byte_arr, as_attachment=False)
+        return send_file(img_byte_arr, as_attachment=False, mimetype='image/png')
     except Exception as e:
         print(e)
         return "There was an error in presenting the image"

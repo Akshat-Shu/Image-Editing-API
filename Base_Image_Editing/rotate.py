@@ -1,5 +1,5 @@
 from PIL import ImageFile, Image
-from Functions.hex_to_float import hex_to_float
+from Functions.hex_to_rgb import hex_to_rgb
 
 
 def rotate(image: ImageFile, parameter_value: str, request_args: dict[str, str]):
@@ -8,7 +8,7 @@ def rotate(image: ImageFile, parameter_value: str, request_args: dict[str, str])
     rotate_expand = None
     try:
         rotate_angle = float(parameter_value)
-        rotate_color = hex_to_float(request_args.get("rotate_background_color", "0"))
+        rotate_color = hex_to_rgb(request_args.get("rotate_background_color", "0"))
         rotate_expand = request_args.get("rotate_expand", "") in [
             'True', 'true', 'Yes', 'yes'
             'T', 't', 'y', 'Y'

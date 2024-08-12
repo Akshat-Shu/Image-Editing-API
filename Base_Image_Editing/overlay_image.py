@@ -15,6 +15,6 @@ def overlay_image_url(image: ImageFile, parameter_value: str, request_args: dict
         return "Unable to resolve your overlay image, you provided a bad URL"
     
     # paste overlay_image
-    image.paste(overlay_image, (overlay_image_x, overlay_image_y), mask=overlay_image)
+    image.paste(overlay_image, (overlay_image_x, overlay_image_y))
     
     return image

@@ -1,2 +1,4 @@
 __pycache__
 image_file.txt
+.venv
+.vscode
