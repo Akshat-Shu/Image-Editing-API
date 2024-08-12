@@ -24,6 +24,13 @@ Further, you can specify the rotate_expand parameter as true or false
 TODO: specify rotate_background_color in hex
 
 ### Overlay Images
+You can specify an Image URL for image to be overlayed using the overlay_image_url parameter, supports images with transparent backgrounds. You can optionally specify the overlay_image_x and overlay_image_y coordinate parameters.
+
+The project's automated design makes it easy to create a new parameter that modifies the Images in wanted ways.
+
+for base_image, you can even specify one of the encoded URL of this service itself. This means that overlay_image can be modified before overlaying on base_image. This also implies that one can create multiple layers of overlaying and multiple overlayed images.
+
+This project is meant for use in those services which do not have the liberty to use image editing tools but can generate a URL based on their needs.
 
 
 Images are not stored as files or temp files on the Hard Disk of any system. They are only stored as variables on the RAM. Using the Pillow library secures against decompression bombs
