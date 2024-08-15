@@ -24,7 +24,10 @@ Further, you can specify the rotate_expand parameter as true or false
 TODO: specify rotate_background_color in hex
 
 ### Overlay Images
-
+Multiple overlay images are supported since URLs allow for multiple values of the same parameters.
+You can use the parameters: overlay_image_url, overlay_image_y, overlay_image_x, overlay_image_width and overlay_image_height to specify where you want to place the overlaying image and of what size.
+overlay_image_url can be a URL of this very web service. Hence, an image edited from this web service can be pasted over another image.
+<ins>EX:</ins> /edit_image?base_image=base.image?overlay_image_url=overlay_image_url1?overlay_image_url=overlay_image_url2 
 
 Images are not stored as files or temp files on the Hard Disk of any system. They are only stored as variables on the RAM. Using the Pillow library secures against decompression bombs
 
