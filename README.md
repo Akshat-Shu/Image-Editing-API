@@ -29,6 +29,12 @@ You can use the parameters: overlay_image_url, overlay_image_y, overlay_image_x,
 overlay_image_url can be a URL of this very web service. Hence, an image edited from this web service can be pasted over another image.
 <ins>EX:</ins> /edit_image?base_image=base.image?overlay_image_url=overlay_image_url1?overlay_image_url=overlay_image_url2 
 
+for base_image, you can even specify one of the encoded URL of this service itself. This means that overlay_image can be modified before overlaying on base_image. This also implies that one can create multiple layers of overlaying and multiple overlayed images.
+
+The project's automated design makes it easy to create a new parameter that modifies the Images in wanted ways.
+
+This project is meant for use in those services which do not have the liberty to use image editing tools but can generate a URL based on their needs.
+
 Images are not stored as files or temp files on the Hard Disk of any system. They are only stored as variables on the RAM. Using the Pillow library secures against decompression bombs
 
 Currently, this project only serves PNG Images But it may serve JPEG images too in the future depending on parameter value
